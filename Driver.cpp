@@ -216,8 +216,33 @@ int main( int argc, char* argv[] ) {  // Array of command-line arguments strings
 //-------|---------|---------|---------|---------|---------|---------|---------|
 
 // Omitted for assignment submission
+/*   if (true) {
+   cout << "UnitTest07: Linked list instantiation test" << endl;
+      // Headnode constructor test
+      LinkedListContext testList1("prevContext1", "keyword1!", "postContext1");
+      cout << "TestList1 keyword  : " << testList1.getKeyword() << endl;
+      cout << testList1.toString() << endl;
 
+      LinkedListContext testList2("prevContext2", "keyword2!", "postContext2");
+      cout << "TestList2 keyword  : " << testList2.getKeyword() << endl;
+      cout << testList2.toString() << endl;
+ 
+      // Linked List assignment (amalgamation) test
+      cout << "Combining 2 lists..." << endl;
+      testList1 = testList2;
+      cout << testList1.toString();
+      cout << endl;
 
+      // 3rd list assignment test
+      cout << "Combining 3 lists..." << endl;
+      LinkedListContext testList3("prevContext3", "keyword3!", "postContext3");
+      cout << "TestList3 keyword  : " << testList3.getKeyword() << endl;
+      cout << testList3.toString() << endl;
+      testList1 = testList3;
+      cout << testList1.toString();
+      cout << endl;
+   }
+*/
 
 //-------|---------|---------|---------|---------|---------|---------|---------|
 //
@@ -278,8 +303,6 @@ int main( int argc, char* argv[] ) {  // Array of command-line arguments strings
 
    }
    */
-
-
 
 
    cout << "This compiles and runs." << endl;

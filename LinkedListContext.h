@@ -486,7 +486,7 @@ LinkedListContext& operator=(LinkedListContext& someLinkedList);
 
 // #operator<< - 
 // X-----------------------X
-// |    #NAME    |
+// |    #operator<<()    |
 // X-----------------------X
 // Description:      
 // Parameters:       

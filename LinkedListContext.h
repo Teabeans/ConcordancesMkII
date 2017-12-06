@@ -416,6 +416,17 @@ string getPrevContext(const NodeContext* currNodePtr) const;
 // Postconditions:   
 // Return value:     
 // Functions called: 
+string getKeyword() const;
+
+// X-----------------------X
+// |    #NAME    |
+// X-----------------------X
+// Description:      
+// Parameters:       
+// Preconditions:    
+// Postconditions:   
+// Return value:     
+// Functions called: 
 string getPostContext(const NodeContext* currNodePtr) const;
 
 
@@ -486,3 +497,5 @@ LinkedListContext& operator=(LinkedListContext& someLinkedList);
 friend ostream& operator<<(ostream& coutStream, LinkedListContext& someLinkedList);
 
 }; // Closing class LinkedListContext
+
+   

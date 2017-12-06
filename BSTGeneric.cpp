@@ -216,10 +216,8 @@ using namespace std;
 // Functions called: 
 template <class typeT>
 bool BSTGeneric<typeT>::deletePostOrder() {
-   // cout << "deletePostOrder() called." << endl; // DEBUG
    // Check for empty tree
    if (rootPtr == nullptr) {
-      // cout << "No traversal possible. This tree is empty." << endl;
       return (false);
    }
    // Otherwise, return the results of the recursive traversal
@@ -249,7 +247,6 @@ bool BSTGeneric<typeT>::deletePostOrder(NodeGeneric<typeT>* thisNode) {
       deletePostOrder(thisNode->rightPtr);
    }
    // Visit (delete)
-   cout << "Poof! " << thisNode->nodeData << endl; // DEBUG
    delete thisNode;
    return(true);
 }
@@ -268,7 +265,6 @@ bool BSTGeneric<typeT>::deletePostOrder(NodeGeneric<typeT>* thisNode) {
 // Functions called: 
 template <class typeT>
 void BSTGeneric<typeT>::obliviate() {
-   cout << "Obliviate!" << endl; // DEBUG
    deletePostOrder();
 }
 
@@ -284,10 +280,8 @@ void BSTGeneric<typeT>::obliviate() {
 // Functions called: 
 template <class typeT>
 bool BSTGeneric<typeT>::traversePreOrder() {
-   // cout << "Pre-Order : " << endl;
    // Check for empty tree
    if (rootPtr == nullptr) {
-      // cout << "No traversal possible. This tree is empty." << endl;
       return (false);
    }
    // Otherwise, return the results of the recursive traversal
@@ -309,7 +303,6 @@ bool BSTGeneric<typeT>::traversePreOrder() {
 template <class typeT>
 bool BSTGeneric<typeT>::traversePreOrder(NodeGeneric<typeT>* thisNode) {
    visit(thisNode);
-   // cout << " , "; // DEBUG
    if (thisNode->leftPtr != nullptr) {
       traversePreOrder(thisNode->leftPtr);
    }
@@ -331,10 +324,8 @@ bool BSTGeneric<typeT>::traversePreOrder(NodeGeneric<typeT>* thisNode) {
 // Functions called: 
 template <class typeT>
 bool BSTGeneric<typeT>::traverseInOrder() {
-   // cout << "In-Order  : " << endl;
    // Check for empty tree
    if (rootPtr == nullptr) {
-      // cout << "No traversal possible. This tree is empty." << endl;
       return (false);
    }
    // Otherwise, return the results of the recursive traversal
@@ -359,7 +350,6 @@ bool BSTGeneric<typeT>::traverseInOrder(NodeGeneric<typeT>* thisNode) {
       traverseInOrder(thisNode->leftPtr);
    }
    visit(thisNode);
-   // cout << " , "; // DEBUG
    if (thisNode->rightPtr != nullptr) {
       traverseInOrder(thisNode->rightPtr);
    }
@@ -378,10 +368,8 @@ bool BSTGeneric<typeT>::traverseInOrder(NodeGeneric<typeT>* thisNode) {
 // Functions called: 
 template <class typeT>
 bool BSTGeneric<typeT>::traversePostOrder() {
-   // cout << "Post-Order: " << endl;
    // Check for empty tree
    if (rootPtr == nullptr) {
-      // cout << "No traversal possible. This tree is empty." << endl;
       return (false);
    }
    // Otherwise, return the results of the recursive traversal
@@ -410,7 +398,6 @@ bool BSTGeneric<typeT>::traversePostOrder(NodeGeneric<typeT>* thisNode) {
    }
 
    visit(thisNode);
-   // cout << " , "; // DEBUG
    return(true);
 }
 
@@ -433,7 +420,6 @@ void BSTGeneric<typeT>::visit(NodeGeneric<typeT>* thisNodePtr) const {
    }
    // Otherwise the node is "deleted", so do nothing.
    else {
-      // cout << "This node is deleted." << endl; // DEBUG
    }
 }
 
@@ -504,18 +490,11 @@ bool BSTGeneric<typeT>::find(string someValue) {
 // Functions called: 
 template <class typeT>
 bool BSTGeneric<typeT>::insert(typeT& someData) { // Receiving by reference
-   // cout << "Insert() called" << endl; // DEBUG
-   // cout << "NodeData: " << someData << endl; // DEBUG
    NodeGeneric<typeT>* currNodePtr = rootPtr;
    NodeGeneric<typeT>* prevNodePtr = nullptr;
    // Initial case: If tree is empty, insert a new node at the root
    if (rootPtr == nullptr) {
-      // cout << "BSTGen.Inserting at root!" << endl; // DEBUG
-
-
-      rootPtr = new NodeGeneric<typeT>(someData); // BUG - Should not be calling the generic node constructor...
-      // cout << endl << endl << "New node created with data and assigned to BST rootPtr. \nBSTGeneric.insert() completed successfully." << endl;
-      // cout << "RootPtr: " << rootPtr->nodeData << endl << endl; // DEBUG
+      rootPtr = new NodeGeneric<typeT>(someData);
       // And halt execution
       return(true);
    }
@@ -528,33 +507,26 @@ bool BSTGeneric<typeT>::insert(typeT& someData) { // Receiving by reference
       // X-------------X
       // |    Equal    |
       // X-------------X
-
       if (currNodePtr->nodeData == someData) {
-         // cout << "Node Equality detected" << endl; // DEBUG
-         // Check if it's deleted
+         // Undelete if necessary
          if (currNodePtr->isDeleted == true) {
             // Undelete it if so
             currNodePtr->isDeleted = false;
-            // And assign someData to the current node data field
-            // This will trigger a LLC operator=() call
-            // cout << "BST.insert() - BST assigning!" << endl;
-            currNodePtr->nodeData = someData; // Testing, 2017.12.04
          }
-         // Else the node isn't deleted, so do nothing to the deletion flag
-         else {
-            // cout << "This node already exists: " << someData << endl; // DEBUG
-            // cout << "BST.insert() - BST assigning!" << endl;
-            currNodePtr->nodeData = someData; // Testing, 2017.12.04
-            return(false);
-         }
+         currNodePtr->nodeData = someData;
+         return(false);
       }
-      // Otherwise, if the insert data is less than the current node data...
+      // X-----------------X
+      // |    Less than    |
+      // X-----------------X
       else if (someData < currNodePtr->nodeData) {
          // Move left
          prevNodePtr = currNodePtr;
          currNodePtr = currNodePtr->leftPtr;
       }
-      // Otherwise, if the insert data is greater than the current node data...
+      // X--------------------X
+      // |    Greater than    |
+      // X--------------------X
       else if (someData > currNodePtr->nodeData) {
          // Move right
          prevNodePtr = currNodePtr;
@@ -562,6 +534,9 @@ bool BSTGeneric<typeT>::insert(typeT& someData) { // Receiving by reference
       }
    } // Ending tree descent. Curr is now nullptr, Prev is the node pointing at Curr
 
+   // X--------------------------X
+   // |    Insertions off end    |
+   // X--------------------------X
    // If insert data is less than this node data, insert left
    if (someData < prevNodePtr->nodeData) {
       prevNodePtr->leftPtr = new NodeGeneric<typeT>(someData);

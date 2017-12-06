@@ -461,7 +461,6 @@ LinkedListContext::~LinkedListContext() {
          this->advance();
          //cout << "Crossing over " << this->currPtr->prevContext << ":" << this->currPtr->postContext << endl; // DEBUG
       } // Closing while loop, curr points to last node, prev points to second to last
-      cout << "Foop!" << this->currPtr->prevContext << ":" << this->currPtr->postContext << endl; // DEBUG
       // And delete it
       delete this->currPtr;
       // And remove the previous pointer
@@ -472,7 +471,6 @@ LinkedListContext::~LinkedListContext() {
 
    // cout << "Deleting Head Node: " << endl; // DEBUG
    // cout << "Deallocating " << this->headNodePtr->prevContext << ":" << this->headNodePtr->postContext << endl; // DEBUG
-   cout << "Foopah!" << endl; // DEBUG
    delete this->headNodePtr;
 }
 

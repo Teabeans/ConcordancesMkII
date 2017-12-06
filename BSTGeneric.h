@@ -358,9 +358,9 @@ bool insert(typeT& someData); // Gets passed a LLC by reference
 void printout();
 
 // #setDelete() -
-// X-----------------------------------X
-// |    #NAME    |
-// X-----------------------------------X
+// X-------------------------X
+// |    #setDelete(typeT)    |
+// X-------------------------X
 // Description:      
 // Parameters:       
 // Preconditions:    

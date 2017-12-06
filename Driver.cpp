@@ -173,11 +173,11 @@
 // #include "NodeGeneric.cpp"
 
 // The BSTGeneric class - Used to create a stopword list and a concordance tree.
-// #include "BSTGeneric.h"
-// #include "BSTGeneric.cpp" // .cpp required here due to generic/template functionality of this class
+#include "BSTGeneric.h"
+#include "BSTGeneric.cpp" // .cpp required here due to generic/template functionality of this class
 
 // The Corpus Reader class - Packages the corpus into valid data modules for the BSTGeneric class to handle
-// #include "ReaderCorpus.h"
+#include "ReaderCorpus.h"
 
 // The LinkedListContext class - Used as a data field in a Concordance Node
 #include "LinkedListContext.h"
@@ -250,7 +250,7 @@ int main( int argc, char* argv[] ) {  // Array of command-line arguments strings
 //
 //-------|---------|---------|---------|---------|---------|---------|---------|
 
-/*   if (true) { // Note to grader: This switch decoupled from control variables for assignment submission
+   if (true) { // Note to grader: This switch decoupled from control variables for assignment submission
 
 
 
@@ -289,7 +289,9 @@ int main( int argc, char* argv[] ) {  // Array of command-line arguments strings
          // Check to see if the current word appears on the stoplist. If not...
          if (!stopListBST.find(theScribe.getCurrWord())) {
             // attempt to insert the current LinkedListContext output
-            concordanceBST.insert(*theScribe.makeLinkedListContext());
+            LinkedListContext* thisList = theScribe.makeLinkedListContext();
+            concordanceBST.insert(*thisList); // ERROR: Leaks coming from this line
+            delete thisList;
          }
          // And move the reader up one word
          theScribe.advance();
@@ -300,9 +302,7 @@ int main( int argc, char* argv[] ) {  // Array of command-line arguments strings
 // |    Display the Concordance    |
 // X-------------------------------X
       concordanceBST.printout();
-
    }
-   */
 
 
    cout << "This compiles and runs." << endl;

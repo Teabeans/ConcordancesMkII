@@ -498,6 +498,19 @@ string LinkedListContext::getPrevContext(const NodeContext* currNodePtr) const {
    return(currNodePtr->prevContext);
 }
 
+// X-----------------------X
+// |    #NAME    |
+// X-----------------------X
+// Description:      
+// Parameters:       
+// Preconditions:    
+// Postconditions:   
+// Return value:     
+// Functions called: 
+string LinkedListContext::getKeyword() const {
+   return (keyword);
+}
+
 // #getPostContext() - Returns the post context of the current node
 // X-----------------------X
 // |    #NAME    |
